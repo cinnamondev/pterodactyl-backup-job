@@ -64,11 +64,10 @@ in your config file, you should specify which server to use with the uuid of the
     
         # sort by date & pull out attributes we find useful
     backups = sorted(
-        [(data['attributes']['uuid'], parser.parse(data['attributes']['completed_at']), data['attributes']['checksum']) for data in r['data']],
+            [(data['attributes']['uuid'], parser.parse(data['attributes']['completed_at']), data['attributes']['checksum'][5:]) for data in r['data']],
         key=lambda t: t[1],
         reverse=True
-    )
-
+        )    
     latest = backups[0]
 
     # filename
@@ -132,8 +131,7 @@ in your config file, you should specify which server to use with the uuid of the
                         ),
                         end='\r',flush=True)
                 sha1.update(data)
-
-        if sha1.hexdigest() == latest[2].strip("sha1:"):  #     LOOP EXIT CONDITION - if the download can be validated, we will move on
+        if str(sha1.hexdigest()) == latest[2]:  #     LOOP EXIT CONDITION - if the download can be validated, we will move on
             print("COMPLETE {server_name} ({shortuuid})".format(server_name=server[2],shortuuid=server[0],),end='\r',flush=True)
             print("\n")
             validated = True
