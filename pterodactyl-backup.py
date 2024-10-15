@@ -70,8 +70,7 @@ in your config file, you should specify which server to use with the uuid of the
     )
 
     latest = backups[0]
-    # generate backup url
-    r = s.get(base_url + "/api/client/servers/" + server[0] + "/backups/" + latest[0] + "/download").json()
+
     # filename
     filename = config['file-format-string'].format( # human readable filename
         node=server[3], 
@@ -96,7 +95,9 @@ in your config file, you should specify which server to use with the uuid of the
     fail_count = 0
     while (not downloaded) or (not validated): # the download step will repeat up to 3 times before skipping. 
         if not downloaded:
-            r = requests.get(r['attributes']['url'], stream=True)
+            # generate backup url
+            r = s.get(base_url + "/api/client/servers/" + server[0] + "/backups/" + latest[0] + "/download").json()
+            r = s.get(r['attributes']['url'], stream=True)
             r.raise_for_status()
             chunk_size = 8192
             total_len = int(r.headers.get('content-length'))
