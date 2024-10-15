@@ -1,0 +1,11 @@
+[Unit]
+Description = execute panel backup script
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=py /some/path/to/pterodactyl-backup.py
+WorkingDirectory=/some/path/to
+
+[Install]
+WantedBy=network.target

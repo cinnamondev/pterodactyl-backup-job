@@ -1,0 +1,10 @@
+{
+    "api_key": "ptlc_yourapikey",
+    "base_url": "http://panel.foo.org",
+    "backups": "/srv/server-backups",
+    "file-format-string": "{node}.{server_name}.{shortuuid}.{checksum}.{year}-{month}-{day}_{hour}{minute}{second}.backup.tar.gz",
+    "servers": [
+        "d80eda9e",
+        "f324fa5a-098b-47ef-bceb-85c140293ad5"
+    ]
+}

@@ -1,0 +1,2 @@
+# prevent secret keys being brought in accidentally
+pt-backup-cfg.json
